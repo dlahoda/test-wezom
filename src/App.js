@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider, StylesProvider } from "@material-ui/core/styles";
 
+import "./styles/styles.scss";
 import AppRouter from "./AppRouter/AppRouter";
 import { NavBar } from "./Containers";
 import theme from "./MaterialTheme/theme";
