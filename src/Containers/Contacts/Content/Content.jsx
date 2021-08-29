@@ -4,15 +4,14 @@ import { useSelector } from "react-redux";
 import { contactsSelectors } from "Redux";
 import GridView from "./GridView/GridView";
 import TableView from "./TableView/TableView";
+import { ContactsContext } from "../Contacts";
 
 const Content = () => {
   const viewType = useSelector(contactsSelectors.selectViewType);
-  const stateData = useSelector(contactsSelectors.selectData);
-
-  const data = "results" in stateData ? stateData.results : null;
+  const { data } = React.useContext(ContactsContext);
 
   // TODO style no data placeholder
-  if (!data || Array.isArray(data) && data.length === 0) {
+  if (!data || (Array.isArray(data) && data.length === 0)) {
     return <div>No Data</div>;
   }
 

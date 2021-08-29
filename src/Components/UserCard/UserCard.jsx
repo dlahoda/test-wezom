@@ -7,38 +7,28 @@ import Typography from "@material-ui/core/Typography";
 
 import { CopyValue } from "Components";
 
-const UserCard = ({ data, index, ...props }) => {
+const UserCard = ({ data }) => {
   const {
-    picture,
-    name,
-    nat,
-    phone,
+    picture_url,
+    full_name,
+    date_of_birth: { dateOfBirth, age },
+    region,
     email,
-    location: { country, street, city, state, postcode },
-    dob,
+    phone,
+    location: { address, country },
   } = data;
-
-  const dateOfBirth = new Intl.DateTimeFormat("en-US").format(
-    new Date(dob.date)
-  );
-
-  const userName = Object.values(name).join(" ");
-
-  const region = new Intl.DisplayNames(["en"], { type: "region" }).of(nat);
-
-  const address = `${street.number} ${street.name}, ${city}, ${state}, ${postcode}`;
 
   return (
     <div className="h-full flex">
       <Card className="w-full" style={{ minWidth: 300 }}>
-        <CardMedia image={picture.large} style={{ height: 240 }} />
+        <CardMedia image={picture_url} style={{ height: 240 }} />
         <CardContent>
           <div className="pb-4">
-            <Typography className="leading-4">{userName}</Typography>
+            <Typography className="leading-4">{full_name}</Typography>
             <Typography
               color="textSecondary"
               variant="caption"
-            >{`${dateOfBirth} - (${dob.age} years), ${region}`}</Typography>
+            >{`${dateOfBirth} - (${age} years), ${region}`}</Typography>
           </div>
           <div className="flex items-center pb-1">
             <CopyValue value={email} />

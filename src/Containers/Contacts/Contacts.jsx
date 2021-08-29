@@ -9,16 +9,25 @@ import Content from "./Content/Content";
 import Statistic from "./Statistic/Statistic";
 import { getReq } from "./api";
 import { contactsActions, contactsSelectors } from "Redux";
+import prepareData from "./prepareData";
 
 Noty.overrideDefaults({
   layout: "bottomRight",
   timeout: 3000,
 });
 
+const ContactsContext = React.createContext();
+
 const Contacts = () => {
   const mounted = React.useRef(false);
   const [fetch, setFetch] = React.useState("");
-  const data = useSelector(contactsSelectors.selectData);
+  const stateData = useSelector(contactsSelectors.selectData);
+
+  const data = React.useMemo(() => {
+    if ("results" in stateData) {
+      return stateData.results.map(prepareData);
+    }
+  }, [stateData]);
 
   React.useEffect(() => {
     mounted.current = true;
@@ -31,7 +40,7 @@ const Contacts = () => {
   React.useEffect(() => {
     let source = axios.CancelToken.source();
 
-    if (fetch !== "" || !data) {
+    if (fetch !== "" || !stateData) {
       getReq(source).then(
         ({ status, data }) => {
           if (status && status === 200) {
@@ -58,13 +67,16 @@ const Contacts = () => {
   }, [fetch]);
 
   return (
-    <div className="px-10 py-5">
-      <Header fetchCallback={() => setFetch(!fetch)} />
-      <FilterPanel />
-      <Content />
-      <Statistic />
-    </div>
+    <ContactsContext.Provider value={{ data: data }}>
+      <div className="px-10 py-5">
+        <Header fetchCallback={() => setFetch(!fetch)} />
+        <FilterPanel />
+        <Content />
+        <Statistic />
+      </div>
+    </ContactsContext.Provider>
   );
 };
 
 export default Contacts;
+export { ContactsContext };

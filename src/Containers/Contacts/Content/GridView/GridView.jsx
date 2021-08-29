@@ -10,7 +10,7 @@ const GridView = ({ data }) => {
         {Array.isArray(data) &&
           data.map((data, index) => (
             <Grid item xs key={index}>
-              <UserCard data={data} index={index} />
+              <UserCard data={data} />
             </Grid>
           ))}
       </Grid>
