@@ -1,66 +1,65 @@
 import React from "react";
 import axios from "axios";
 import Noty from "noty";
+import { useSelector } from "react-redux";
 
 import Header from "./Header/Header";
 import FilterPanel from "./FilterPanel/FilterPanel";
 import Content from "./Content/Content";
 import Statistic from "./Statistic/Statistic";
+import { getReq } from "./api";
+import { contactsActions, contactsSelectors } from "Redux";
 
-const URL = "https://randomuser.me/api/";
-const seed = "wezom-test";
+Noty.overrideDefaults({
+  layout: "bottomRight",
+  timeout: 3000,
+});
 
 const Contacts = (props) => {
   const mounted = React.useRef(false);
+  const [fetch, setFetch] = React.useState("");
+  const data = useSelector(contactsSelectors.selectData);
 
   React.useEffect(() => {
     mounted.current = true;
 
-    let source = axios.CancelToken.source();
-
-    fetchContacts({ source });
-
     return () => {
       mounted.current = false;
-      source.cancel();
     };
   });
 
-  const fetchContacts = async ({ source }) => {
-    try {
-      await axios
-        .get(URL, {
-          params: {
-            seed,
-            results: _.random(300, 600, false),
-          },
-          ...(source
-            ? {
-                cancelToken: source.token,
-              }
-            : {}),
-        })
-        .then((response) => {
-          if (
-            mounted.current &&
-            "status" in response &&
-            response.status === 200
-          ) {
-            console.log("response.data", response.data);
+  React.useEffect(() => {
+    let source = axios.CancelToken.source();
+
+    if (fetch !== "" || !data) {
+      getReq(source).then(
+        ({ status, data }) => {
+          if (status && status === 200) {
+            contactsActions.setContacts(data);
+
+            new Noty({
+              type: "success",
+              text: "Data Updated!",
+            }).show();
           }
-        });
-    } catch (error) {
-      new Noty({
-        type: "error",
-        layout: "bottomRight",
-        text: error.message || error,
-      }).show();
+        },
+        (error) => {
+          new Noty({
+            type: "error",
+            text: error.message || error,
+          }).show();
+        }
+      );
     }
-  };
+
+    return () => {
+      source.cancel();
+    };
+  }, [fetch]);
 
   return (
     <div className="px-10 py-5">
-      <Header fetchCallback={fetchContacts} />
+      <Header fetchCallback={() => setFetch(!fetch)} />
       <FilterPanel />
       <Content />
       <Statistic />

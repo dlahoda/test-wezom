@@ -60,6 +60,14 @@ module.exports = {
           _: "lodash",
         }),
       ];
+
+      config.resolve = {
+        ...config.resolve,
+        alias: {
+          ...config.resolve.alias,
+          Redux: path.resolve(__dirname, "./src/redux"),
+        },
+      };
     }
 
     return config;
