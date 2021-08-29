@@ -12,7 +12,12 @@ const useStyles = makeStyles((theme) => {
 const AppRouter = () => {
   const classes = useStyles();
   return (
-    <div>
+    <div
+      className="bg-cover bg-no-repeat bg-center min-h-screen"
+      style={{
+        backgroundImage: `url(/media/images/backdrop-min.jpg)`,
+      }}
+    >
       <div className={classes.offset}></div>
       <Switch>
         <Route exact path="/">

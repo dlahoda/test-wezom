@@ -22,7 +22,7 @@ const selectLabelId = uid();
 
 const FilterPanel = (props) => {
   return (
-    <div className="p-2.5">
+    <div className="p-2.5 rounded-t-sm" style={{ backgroundColor: "#fafafa" }}>
       <Paper>
         <div className="flex items-center p-4">
           <TextField placeholder="Search by full name" />

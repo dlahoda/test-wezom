@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 const Statistic = (props) => {
   return (
-    <div className="p-2.5">
+    <div className="p-2.5 rounded-b-sm" style={{ backgroundColor: "#fafafa" }}>
       <Paper>
         <div className="p-4">
           <Typography variant="h4">Statistic</Typography>

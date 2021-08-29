@@ -19,7 +19,7 @@ const NavBar = () => {
         >
           <Box boxSizing="border-box" pr={4.5}>
             <Link to="/">
-              <img src="media\svg\wezom-logo.324b96ae.svg" />
+              <img src="media\svg\wezom-logo.svg" />
             </Link>
           </Box>
           <Box boxSizing="border-box" px={1}>
