@@ -9,8 +9,8 @@ const GridView = ({ data, ...props }) => {
       <Grid container spacing={3} justifyContent="space-between">
         {Array.isArray(data) &&
           data.map((data, index) => (
-            <Grid item xs>
-              <UserCard key={index} data={data} />
+            <Grid item xs key={index}>
+              <UserCard data={data} index={index} />
             </Grid>
           ))}
       </Grid>
