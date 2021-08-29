@@ -1,12 +1,13 @@
 import React from "react";
 import { useTable } from "react-table";
 
-const Table = ({ colDefs, rowData }) => {
+const Table = ({ colDefs, rowData, useTableProps = {} }) => {
   const columns = React.useMemo(() => colDefs, [colDefs]);
   const data = React.useMemo(() => rowData, [rowData]);
   const tableInstance = useTable({
     columns,
     data,
+    ...useTableProps,
   });
 
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =

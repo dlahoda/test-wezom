@@ -1,5 +1,7 @@
-export default function prepareData(entry) {
-  let result = {};
+export default function prepareData(entry, index) {
+  let result = {
+    index,
+  };
 
   const {
     picture,
