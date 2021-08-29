@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 
 import { UserCard } from "Components";
 
-const GridView = ({ data, ...props }) => {
+const GridView = ({ data }) => {
   return (
     <div className="p-2.5">
       <Grid container spacing={3} justifyContent="space-between">

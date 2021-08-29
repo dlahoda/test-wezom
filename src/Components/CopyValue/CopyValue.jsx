@@ -5,7 +5,6 @@ import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined";
 
 const CopyValue = ({ value, ...props }) => {
   const handleClick = () => {
-    console.log("value", value);
     navigator.clipboard.writeText(value);
   };
 
