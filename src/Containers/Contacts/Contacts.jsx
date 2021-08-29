@@ -23,7 +23,12 @@ const Contacts = () => {
   const [fetch, setFetch] = React.useState("");
   const stateData = useSelector(contactsSelectors.selectData);
   const [pagination, setPagination] = React.useState({});
-  const [filters, setFilters] = React.useState({});
+  const [filters, setFilters] = React.useState({
+    full_name: "",
+    gender: "",
+    nat: "",
+    creator: false,
+  });
   const [data, setData] = React.useState(null);
   const [sort, setSort] = React.useState("default");
 
@@ -97,7 +102,7 @@ const Contacts = () => {
 
   return (
     <ContactsContext.Provider
-      value={{ data: data, pagination, filters, sort, setSort }}
+      value={{ data: data, pagination, filters, setFilters, sort, setSort }}
     >
       <div className="px-10 py-5">
         <Header fetchCallback={() => setFetch(!fetch)} />

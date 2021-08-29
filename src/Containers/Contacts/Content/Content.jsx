@@ -8,7 +8,7 @@ import { ContactsContext } from "../Contacts";
 
 const Content = () => {
   const viewType = useSelector(contactsSelectors.selectViewType);
-  const { data } = React.useContext(ContactsContext);
+  const { data, filters } = React.useContext(ContactsContext);
 
   // TODO style no data placeholder
   if (!data || (Array.isArray(data) && data.length === 0)) {

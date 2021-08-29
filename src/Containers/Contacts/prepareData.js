@@ -31,6 +31,7 @@ export default function prepareData(entry, index) {
     address: `${street.number} ${street.name}, ${city}, ${state}, ${postcode}`,
   };
   result.region = new Intl.DisplayNames(["en"], { type: "region" }).of(nat);
+  result.nat = nat;
 
   return result;
 }
