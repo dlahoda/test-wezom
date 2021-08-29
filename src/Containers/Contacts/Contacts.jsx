@@ -15,7 +15,7 @@ Noty.overrideDefaults({
   timeout: 3000,
 });
 
-const Contacts = (props) => {
+const Contacts = () => {
   const mounted = React.useRef(false);
   const [fetch, setFetch] = React.useState("");
   const data = useSelector(contactsSelectors.selectData);
