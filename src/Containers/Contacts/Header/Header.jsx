@@ -5,18 +5,15 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
 import RefreshIcon from "@material-ui/icons/Refresh";
-import AppsIcon from "@material-ui/icons/Apps";
-import ListIcon from "@material-ui/icons/List";
-
 import ViewComfyIcon from "@material-ui/icons/ViewComfy";
 import ViewListIcon from "@material-ui/icons/ViewList";
 
-const Header = (props) => {
+const Header = ({ fetchCallback, ...props }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center" {...props}>
       <Typography variant="h4">Contacts</Typography>
       <div className="flex-grow" />
-      <IconButton color="primary">
+      <IconButton color="primary" onClick={fetchCallback}>
         <RefreshIcon />
       </IconButton>
       <ButtonGroup color="primary">

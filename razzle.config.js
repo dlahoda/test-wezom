@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -51,6 +52,13 @@ module.exports = {
             "sass-loader",
           ],
         },
+      ];
+
+      config.plugins = [
+        ...config.plugins,
+        new webpack.ProvidePlugin({
+          _: "lodash",
+        }),
       ];
     }
 
