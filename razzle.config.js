@@ -22,7 +22,7 @@ module.exports = {
               : {
                   loader: path.resolve(
                     __dirname,
-                    "node_modules\\razzle\\node_modules\\style-loader\\dist\\cjs.js"
+                    "node_modules/razzle/node_modules/style-loader/dist/cjs.js"
                   ),
                   ident: "razzle-style-loader",
                 },
@@ -30,7 +30,7 @@ module.exports = {
             {
               loader: path.resolve(
                 __dirname,
-                "node_modules\\razzle\\node_modules\\css-loader\\dist\\cjs.js"
+                "node_modules/razzle/node_modules/css-loader/dist/cjs.js"
               ),
               ident: "razzle-css-loader",
               options: {
@@ -44,7 +44,7 @@ module.exports = {
             {
               loader: path.resolve(
                 __dirname,
-                "node_modules\\postcss-loader\\dist\\cjs.js"
+                "node_modules/postcss-loader/dist/cjs.js"
               ),
               options: undefined,
               ident: "razzle-postcss-loader",
