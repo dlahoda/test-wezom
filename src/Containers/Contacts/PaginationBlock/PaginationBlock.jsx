@@ -10,9 +10,10 @@ import { ContactsContext } from "../Contacts";
 const PAGE_SIZES = [12, 24, 48];
 
 const PaginationBlock = () => {
-  const { pagination, setPagination } = React.useContext(ContactsContext);
+  const { filteredData, pagination, setPagination } =
+    React.useContext(ContactsContext);
 
-  if (pagination) {
+  if (Array.isArray(filteredData) && filteredData.length > 0 && pagination) {
     const { count, page, pageLimit } = pagination;
 
     const handlePageChange = (_e, value) => {
