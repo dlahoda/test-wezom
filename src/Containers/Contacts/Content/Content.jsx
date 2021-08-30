@@ -6,20 +6,26 @@ import GridView from "./GridView/GridView";
 import TableView from "./TableView/TableView";
 import { ContactsContext } from "../Contacts";
 
+import NoData from "./NoData/NoData";
+
 const Content = () => {
   const viewType = useSelector(contactsSelectors.selectViewType);
   const { filteredData, pagination } = React.useContext(ContactsContext);
 
-  if (filteredData && pagination && viewType === "grid") {
+  if (
+    Array.isArray(filteredData) &&
+    filteredData.length > 0 &&
+    pagination &&
+    viewType === "grid"
+  ) {
     return <GridView />;
   }
 
-  if (filteredData && pagination) {
+  if (Array.isArray(filteredData) && filteredData.length > 0 && pagination) {
     return <TableView />;
   }
 
-  // TODO style no data placeholder
-  return <div>No Data</div>;
+  return <NoData />;
 };
 
 export default Content;
