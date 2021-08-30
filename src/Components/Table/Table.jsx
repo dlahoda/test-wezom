@@ -13,14 +13,14 @@ const Table = ({ colDefs, rowData, useTableProps = {} }) => {
     tableInstance;
 
   return (
-    <table {...getTableProps}>
+    <table {...getTableProps({ className: clsx("w-full") })}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
               <th
                 {...column.getHeaderProps({
-                  className: clsx("px-2", column.className),
+                  className: clsx(column.className, "px-2 py-1"),
                   style: column.style,
                 })}
               >
@@ -39,7 +39,10 @@ const Table = ({ colDefs, rowData, useTableProps = {} }) => {
                 return (
                   <td
                     {...cell.getCellProps({
-                      className: clsx("px-2", cell.column.className),
+                      className: clsx(
+                        cell.column.className,
+                        "px-2 py-1"
+                      ),
                       style: cell.column.style,
                     })}
                   >

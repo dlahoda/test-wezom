@@ -12,7 +12,7 @@ const columns = [
     accessor: "picture_url",
     Cell: ({ value }) => {
       return (
-        <div style={{ height: 40, width: 40 }}>
+        <div className="mx-auto" style={{ height: 40, width: 40 }}>
           <img className="rounded-full" src={value} />
         </div>
       );
@@ -68,11 +68,13 @@ const columns = [
       );
     },
     accessor: "full_name",
+    className: "text-center",
     style: { minWidth: 150 },
   },
   {
     Header: "Birthday",
     accessor: "date_of_birth",
+    className: "text-center",
     Cell: ({ value }) => {
       return (
         <div>
@@ -129,6 +131,7 @@ const columns = [
   {
     Header: "Nationality",
     accessor: "region",
+    className: "text-center",
   },
 ];
 
