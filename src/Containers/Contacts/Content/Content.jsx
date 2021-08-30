@@ -8,7 +8,7 @@ import { ContactsContext } from "../Contacts";
 
 const Content = () => {
   const viewType = useSelector(contactsSelectors.selectViewType);
-  const { data, filteredData, pagination } = React.useContext(ContactsContext);
+  const { filteredData, pagination } = React.useContext(ContactsContext);
 
   if (filteredData && pagination && viewType === "grid") {
     return <GridView />;
