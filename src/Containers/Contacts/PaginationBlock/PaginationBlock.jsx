@@ -1,0 +1,54 @@
+import React from "react";
+
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Pagination from "@material-ui/lab/Pagination";
+
+import { ContactsContext } from "../Contacts";
+
+const PaginationBlock = (props) => {
+  const { pagination, setPagination } = React.useContext(ContactsContext);
+
+  if (pagination) {
+    const { count, page, pageLimit } = pagination;
+
+    const handlePageChange = (_e, value) => {
+      setPagination((oldState) => ({
+        ...oldState,
+        page: value,
+      }));
+    };
+
+    const handleLimitChange = (e) => {
+      const value = e.target.value;
+      setPagination((oldState) => {
+        return {
+          ...oldState,
+          pageLimit: value,
+          count: Math.ceil(oldState.total / value),
+        };
+      });
+    };
+
+    return (
+      <div className="flex items-center">
+        <div className="flex-grow" />
+        <Pagination count={count} page={page} onChange={handlePageChange} />
+        <div>
+          <FormControl>
+            <Select value={pageLimit} onChange={handleLimitChange}>
+              <MenuItem value={10}>10 per page</MenuItem>
+              <MenuItem value={25}>25 per page</MenuItem>
+              <MenuItem value={50}>50 per page</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+};
+
+export default PaginationBlock;

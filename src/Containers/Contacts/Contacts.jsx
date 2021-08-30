@@ -7,6 +7,7 @@ import Header from "./Header/Header";
 import FilterPanel from "./FilterPanel/FilterPanel";
 import Content from "./Content/Content";
 import Statistic from "./Statistic/Statistic";
+import PaginationBlock from "./PaginationBlock/PaginationBlock";
 import { getReq } from "./api";
 import { contactsActions, contactsSelectors } from "Redux";
 import prepareData from "./prepareData";
@@ -22,7 +23,8 @@ const Contacts = () => {
   const mounted = React.useRef(false);
   const [fetch, setFetch] = React.useState("");
   const stateData = useSelector(contactsSelectors.selectData);
-  const [pagination, setPagination] = React.useState({});
+  const viewType = useSelector(contactsSelectors.selectViewType);
+  const [pagination, setPagination] = React.useState(null);
   const [filters, setFilters] = React.useState({
     full_name: "",
     gender: "",
@@ -59,6 +61,18 @@ const Contacts = () => {
         }
       }
 
+      const pageLimit = 10;
+      const total = newData.length;
+      const count = Math.ceil(total / pageLimit);
+
+      const _pagination = {
+        page: 1,
+        pageLimit: 10,
+        total,
+        count,
+      };
+
+      setPagination(_pagination);
       setData(newData);
     }
   }, [stateData, sort]);
@@ -102,13 +116,23 @@ const Contacts = () => {
 
   return (
     <ContactsContext.Provider
-      value={{ data: data, pagination, filters, setFilters, sort, setSort }}
+      value={{
+        data: data,
+        pagination,
+        filters,
+        setFilters,
+        sort,
+        setSort,
+        pagination,
+        setPagination,
+      }}
     >
       <div className="px-10 py-5">
         <Header fetchCallback={() => setFetch(!fetch)} />
         <FilterPanel />
         <Content />
         <Statistic />
+        <PaginationBlock />
       </div>
     </ContactsContext.Provider>
   );
