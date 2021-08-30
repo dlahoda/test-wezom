@@ -101,7 +101,7 @@ const FilterPanel = () => {
               control={control}
               render={({ field }) => (
                 <Autocomplete
-                  style={{ minWidth: 150 }}
+                  style={{ minWidth: 250 }}
                   options={nationalityOptions}
                   getOptionLabel={(option) => option.label || ""}
                   renderInput={(params) => (
