@@ -32,6 +32,7 @@ const Contacts = () => {
     creator: false,
   });
   const [data, setData] = React.useState(null);
+  const [filteredData, setFilteredData] = React.useState([]);
   const [sort, setSort] = React.useState("default");
 
   React.useEffect(() => {
@@ -61,21 +62,39 @@ const Contacts = () => {
         }
       }
 
-      const pageLimit = 10;
-      const total = newData.length;
+      setData(newData);
+    }
+  }, [stateData, sort]);
+
+  React.useEffect(() => {
+    const { full_name, gender, nat, creator } = filters;
+
+    if (data) {
+      const filteredData = data.filter(
+        (item) =>
+          (full_name && item.full_name
+            ? item.full_name.toLowerCase().includes(full_name.toLowerCase())
+            : true) &&
+          (gender && item.gender ? item.gender === gender : true) &&
+          (nat && item.nat ? item.nat === nat.value : true) &&
+          !creator
+      );
+
+      const pageLimit = 12;
+      const total = filteredData.length;
       const count = Math.ceil(total / pageLimit);
 
       const _pagination = {
         page: 1,
-        pageLimit: 10,
+        pageLimit,
         total,
         count,
       };
 
       setPagination(_pagination);
-      setData(newData);
+      setFilteredData(filteredData);
     }
-  }, [stateData, sort]);
+  }, [data, filters]);
 
   React.useEffect(() => {
     mounted.current = true;
@@ -125,6 +144,7 @@ const Contacts = () => {
         setSort,
         pagination,
         setPagination,
+        filteredData,
       }}
     >
       <div className="px-10 py-5">

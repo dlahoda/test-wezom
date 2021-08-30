@@ -7,7 +7,9 @@ import Pagination from "@material-ui/lab/Pagination";
 
 import { ContactsContext } from "../Contacts";
 
-const PaginationBlock = (props) => {
+const PAGE_SIZES = [12, 24, 48];
+
+const PaginationBlock = () => {
   const { pagination, setPagination } = React.useContext(ContactsContext);
 
   if (pagination) {
@@ -32,15 +34,27 @@ const PaginationBlock = (props) => {
     };
 
     return (
-      <div className="flex items-center">
+      <div className="flex items-center px-2.5 pt-2 pb-6">
         <div className="flex-grow" />
-        <Pagination count={count} page={page} onChange={handlePageChange} />
+        <Pagination
+          count={count}
+          page={page}
+          onChange={handlePageChange}
+          className="pr-2"
+        />
         <div>
           <FormControl>
-            <Select value={pageLimit} onChange={handleLimitChange}>
-              <MenuItem value={10}>10 per page</MenuItem>
-              <MenuItem value={25}>25 per page</MenuItem>
-              <MenuItem value={50}>50 per page</MenuItem>
+            <Select
+              value={pageLimit}
+              onChange={handleLimitChange}
+              disableUnderline={true}
+            >
+              {PAGE_SIZES.map((value, index) => (
+                <MenuItem
+                  key={index}
+                  value={value}
+                >{`${value} per page`}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>

@@ -8,18 +8,18 @@ import { ContactsContext } from "../Contacts";
 
 const Content = () => {
   const viewType = useSelector(contactsSelectors.selectViewType);
-  const { data, filters } = React.useContext(ContactsContext);
+  const { data, filteredData, pagination } = React.useContext(ContactsContext);
+
+  if (filteredData && pagination && viewType === "grid") {
+    return <GridView />;
+  }
+
+  if (filteredData && pagination) {
+    return <TableView />;
+  }
 
   // TODO style no data placeholder
-  if (!data || (Array.isArray(data) && data.length === 0)) {
-    return <div>No Data</div>;
-  }
-
-  if (viewType === "grid") {
-    return <GridView data={data} />;
-  }
-
-  return <TableView data={data} />;
+  return <div>No Data</div>;
 };
 
 export default Content;

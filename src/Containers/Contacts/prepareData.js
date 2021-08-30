@@ -11,6 +11,7 @@ export default function prepareData(entry, index) {
     phone,
     email,
     location: { country, street, city, state, postcode },
+    gender,
   } = entry;
 
   result.picture_url = picture.large;
@@ -32,6 +33,7 @@ export default function prepareData(entry, index) {
   };
   result.region = new Intl.DisplayNames(["en"], { type: "region" }).of(nat);
   result.nat = nat;
+  result.gender = gender;
 
   return result;
 }

@@ -5,14 +5,21 @@ import { ContactsContext } from "../../Contacts";
 
 import columns from "./columns";
 
-const TableView = ({ data }) => {
-  const { sort, setSort } = React.useContext(ContactsContext);
+const TableView = () => {
+  const {
+    sort,
+    setSort,
+    filteredData,
+    pagination: { pageLimit, page } = {},
+  } = React.useContext(ContactsContext);
+
+  const data = _.chunk(filteredData, pageLimit);
 
   return (
     <div>
       <Table
         colDefs={columns}
-        rowData={data}
+        rowData={data[page - 1]}
         useTableProps={{ sort, setSort }}
       />
     </div>

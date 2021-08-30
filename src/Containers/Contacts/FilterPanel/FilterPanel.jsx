@@ -94,7 +94,6 @@ const FilterPanel = (props) => {
                     >
                       <MenuItem value="female">Female</MenuItem>
                       <MenuItem value="male">Male</MenuItem>
-                      <MenuItem value="indeterminate">Indeterminate</MenuItem>
                     </Select>
                   </FormControl>
                 );
