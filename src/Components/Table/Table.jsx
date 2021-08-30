@@ -1,5 +1,6 @@
 import React from "react";
 import { useTable } from "react-table";
+import clsx from "clsx";
 
 const Table = ({ colDefs, rowData, useTableProps = {} }) => {
   const columns = React.useMemo(() => colDefs, [colDefs]);
@@ -17,7 +18,14 @@ const Table = ({ colDefs, rowData, useTableProps = {} }) => {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <th
+                {...column.getHeaderProps({
+                  className: clsx("px-2", column.className),
+                  style: column.style,
+                })}
+              >
+                {column.render("Header")}
+              </th>
             ))}
           </tr>
         ))}
@@ -28,7 +36,16 @@ const Table = ({ colDefs, rowData, useTableProps = {} }) => {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                return (
+                  <td
+                    {...cell.getCellProps({
+                      className: clsx("px-2", cell.column.className),
+                      style: cell.column.style,
+                    })}
+                  >
+                    {cell.render("Cell")}
+                  </td>
+                );
               })}
             </tr>
           );

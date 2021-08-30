@@ -68,6 +68,7 @@ const columns = [
       );
     },
     accessor: "full_name",
+    style: { minWidth: 150 },
   },
   {
     Header: "Birthday",
@@ -112,6 +113,7 @@ const columns = [
   {
     Header: "Location",
     accessor: "location",
+    style: { minWidth: 450 },
     Cell: ({ value: { country, address } }) => {
       return (
         <div className="flex items-center">

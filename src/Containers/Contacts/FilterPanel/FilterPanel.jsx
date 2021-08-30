@@ -12,6 +12,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 
+import "./styles.scss";
+
 const selectLabelId = uid();
 
 import { ContactsContext } from "../Contacts";
@@ -23,7 +25,7 @@ const defaultValues = {
   creator: false,
 };
 
-const FilterPanel = (props) => {
+const FilterPanel = () => {
   const { data, setFilters } = React.useContext(ContactsContext);
   const nationalityOptions = React.useMemo(() => {
     if (Array.isArray(data)) {
@@ -54,14 +56,13 @@ const FilterPanel = (props) => {
     <div className="p-2.5 rounded-t-sm" style={{ backgroundColor: "#fafafa" }}>
       <Paper>
         <div className="p-4">
-          <form className="flex items-center">
+          <form className="filter-panel-form flex items-center justify-between">
             <Controller
               name="full_name"
               control={control}
               render={({ field }) => (
                 <TextField
                   style={{ minWidth: 300 }}
-                  className="pr-4"
                   placeholder="Search by full name"
                   variant="outlined"
                   {...field}
@@ -73,11 +74,7 @@ const FilterPanel = (props) => {
               control={control}
               render={({ field }) => {
                 return (
-                  <FormControl
-                    className="pr-4"
-                    variant="outlined"
-                    style={{ minWidth: 120 }}
-                  >
+                  <FormControl variant="outlined" style={{ minWidth: 150 }}>
                     <InputLabel
                       id={selectLabelId}
                       classes={{
@@ -104,8 +101,7 @@ const FilterPanel = (props) => {
               control={control}
               render={({ field }) => (
                 <Autocomplete
-                  style={{ minWidth: 300 }}
-                  className="pr-4"
+                  style={{ minWidth: 150 }}
                   options={nationalityOptions}
                   getOptionLabel={(option) => option.label || ""}
                   renderInput={(params) => (
@@ -125,20 +121,22 @@ const FilterPanel = (props) => {
               control={control}
               render={({ field }) => {
                 return (
-                  <FormControlLabel
-                    className="pr-4"
-                    control={<Checkbox checked={field.value} />}
-                    label="I am creator"
-                    {...field}
-                  />
+                  <div style={{ minWidth: 150 }}>
+                    <FormControlLabel
+                      control={<Checkbox checked={field.value} />}
+                      label="I am creator"
+                      {...field}
+                    />
+                  </div>
                 );
               }}
             />
 
-            <div className="flex-grow" />
-            <Button color="primary" variant="outlined" onClick={onReset}>
-              Reset
-            </Button>
+            <div className="flex-grow flex justify-end">
+              <Button color="primary" variant="outlined" onClick={onReset}>
+                Reset
+              </Button>
+            </div>
           </form>
         </div>
       </Paper>

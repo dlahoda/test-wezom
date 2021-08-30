@@ -16,7 +16,7 @@ const TableView = () => {
   const data = _.chunk(filteredData, pageLimit);
 
   return (
-    <div>
+    <div className="px-2.5 overflow-x-auto">
       <Table
         colDefs={columns}
         rowData={data[page - 1]}

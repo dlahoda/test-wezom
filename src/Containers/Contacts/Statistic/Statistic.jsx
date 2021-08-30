@@ -2,10 +2,11 @@ import React from "react";
 
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 import { ContactsContext } from "../Contacts";
 import LabelValue from "./LabelValue/LabelValue";
+
+import "./styles.scss";
 
 const Statistic = () => {
   const { filteredData } = React.useContext(ContactsContext);
@@ -61,8 +62,7 @@ const Statistic = () => {
             Nationalities
           </Typography>
           <div
-            className="flex flex-col flex-wrap pt-1"
-            style={{ maxHeight: 150 }}
+            className="nationalities-block inline-flex flex-col flex-wrap pt-1 justify-start"
           >
             {Object.entries(nationalities).map(
               ([nationality, count], index) => (
