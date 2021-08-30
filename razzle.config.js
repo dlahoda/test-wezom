@@ -60,10 +60,6 @@ module.exports = {
         maxAssetSize: 512000,
       };
 
-      if (!opts.env.dev) {
-        config.devtool = false;
-      }
-
       config.plugins = [
         ...config.plugins,
         new webpack.ProvidePlugin({
