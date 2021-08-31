@@ -7,7 +7,7 @@ const getReq = async (source) => {
     const { data, status } = await axios.get(URL, {
       params: {
         seed: SEED,
-        results: _.random(30, 60, false),
+        results: _.random(50, 300, false),
       },
       cancelToken: source.token,
     });
