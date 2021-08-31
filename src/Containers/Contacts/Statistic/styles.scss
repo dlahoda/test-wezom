@@ -1,0 +1,12 @@
+.nationalities-block {
+  max-height: 200px;
+
+  @media (max-width: 1080px) {
+    max-height: 400px;
+  }
+
+  & > * {
+    max-width: 200px;
+    padding-right: 16px;
+  }
+}

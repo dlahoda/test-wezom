@@ -23,7 +23,7 @@ const AppRouter = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/contacts">
+        <Route exact path="/contacts">
           <Contacts />
         </Route>
         <Route path="*">

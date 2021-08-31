@@ -1,0 +1,19 @@
+.filter-panel-form {
+  & > * {
+    padding-right: 16px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  @media (max-width: 1080px) {
+    flex-wrap: wrap;
+
+    & > * {
+      width: 100%;
+      padding-right: 0;
+      padding-bottom: 8px;
+    }
+  }
+}
