@@ -36,7 +36,7 @@ const Contacts = () => {
   const [sort, setSort] = React.useState("default");
 
   React.useEffect(() => {
-    if ("results" in stateData) {
+    if (stateData && "results" in stateData) {
       const newData = stateData.results.map(prepareData);
 
       let sortedData;
