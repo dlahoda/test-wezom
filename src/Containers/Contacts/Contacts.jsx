@@ -147,7 +147,7 @@ const Contacts = () => {
         filteredData,
       }}
     >
-      <div className="px-10 py-5">
+      <div className="px-10 py-5" style={{ minWidth: 600 }}>
         <Header fetchCallback={() => setFetch(!fetch)} />
         <FilterPanel />
         <Content />
